@@ -33,6 +33,8 @@ jobs:
       - name: Build React SPA
         run: npm run build -- --base=/maps/vitamind/ # Build with the correct absolute base path
         working-directory: vitamind
+        env:
+          VITE_MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
 
       - name: Prepare Pages Artifact
         run: |
