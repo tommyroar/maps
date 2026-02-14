@@ -31,7 +31,7 @@ jobs:
         working-directory: vitamind
 
       - name: Build React SPA
-        run: npm run build -- --base=/maps/vitamind/
+        run: npm run build -- --base=/vitamind/
         working-directory: vitamind
 
       - name: Upload GitHub Pages artifact
