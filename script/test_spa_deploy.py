@@ -11,7 +11,7 @@ WORKFLOW_NAME = "Deploy Vitamind SPA to GitHub Pages"
 EXPECTED_DEPLOY_PATH = "vitamind" # Relative path within the GitHub Pages site
 GITHUB_PAGES_BASE_URL = f"https://{REPO_OWNER}.github.io/{REPO_NAME}/"
 SPA_DEPLOY_URL = f"{GITHUB_PAGES_BASE_URL}{EXPECTED_DEPLOY_PATH}"
-EXPECTED_SPA_TITLE = "Vite + React" # Expected title of the React SPA
+EXPECTED_SPA_TITLE = "vitamind" # Expected title of the React SPA
 
 def run_gh_command(command_parts):
     """Runs a gh CLI command and returns its JSON output."""
@@ -77,6 +77,9 @@ def verify_deployed_content(url):
         else:
             print(f"Content verification: Title '{EXPECTED_SPA_TITLE}' not found or incorrect.")
             print(f"Actual title found: {title_tag.string if title_tag else 'None'}")
+            print("\n--- Fetched HTML Content (for debugging) ---")
+            print(response.text)
+            print("------------------------------------------\n")
             return False
 
     except requests.exceptions.RequestException as e:

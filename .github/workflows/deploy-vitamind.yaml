@@ -31,7 +31,7 @@ jobs:
         working-directory: vitamind
 
       - name: Build React SPA
-        run: npm run build # Build with relative paths
+        run: npm run build -- --base=/maps/vitamind/ # Build with the correct absolute base path
         working-directory: vitamind
 
       - name: Prepare Pages Artifact
