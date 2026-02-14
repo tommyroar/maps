@@ -1,0 +1,51 @@
+name: Deploy Static HTML Test Page
+
+on:
+  workflow_dispatch: # Allows manual triggering from the GitHub UI
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "github-pages-html-test"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create Test HTML Content
+        run: |
+          mkdir -p test-html/vitamind
+          echo "<!DOCTYPE html>" > test-html/vitamind/index.html
+          echo "<html lang='en'>" >> test-html/vitamind/index.html
+          echo "<head>" >> test-html/vitamind/index.html
+          echo "  <meta charset='UTF-8'>" >> test-html/vitamind/index.html
+          echo "  <meta name='viewport' content='width=device-width, initial-scale=1.0'>" >> test-html/vitamind/index.html
+          echo "  <title>Vitamind HTML Test Page</title>" >> test-html/vitamind/index.html
+          echo "  <style>" >> test-html/vitamind/index.html
+          echo "    body { font-family: sans-serif; margin: 2rem; background-color: #282c34; color: white; }" >> test-html/vitamind/index.html
+          echo "    h1 { color: #61dafb; }" >> test-html/vitamind/index.html
+          echo "    p { font-size: 1.2rem; }" >> test-html/vitamind/index.html
+          echo "  </style>" >> test-html/vitamind/index.html
+          echo "</head>" >> test-html/vitamind/index.html
+          echo "<body>" >> test-html/vitamind/index.html
+          echo "  <h1>Vitamind Test Page Deployed!</h1>" >> test-html/vitamind/index.html
+          echo "  <p>This static HTML page confirms successful deployment to <code>/maps/vitamind</code>.</p>" >> test-html/vitamind/index.html
+          echo "  <p>Deployment time: $(date)</p>" >> test-html/vitamind/index.html
+          echo "</body>" >> test-html/vitamind/index.html
+          echo "</html>" >> test-html/vitamind/index.html
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: test-html # Upload the directory containing vitamind/index.html
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
