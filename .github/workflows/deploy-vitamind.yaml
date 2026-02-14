@@ -31,13 +31,18 @@ jobs:
         working-directory: vitamind
 
       - name: Build React SPA
-        run: npm run build -- --base=/vitamind/
+        run: npm run build # Build with relative paths
         working-directory: vitamind
+
+      - name: Prepare Pages Artifact
+        run: |
+          mkdir gh-pages-staging
+          mv vitamind/dist gh-pages-staging/vitamind # Move built SPA into 'vitamind' subdirectory within staging
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: vitamind/dist # Path to your build output directory
+          path: gh-pages-staging # Upload the staging directory
 
   deploy:
     environment:
