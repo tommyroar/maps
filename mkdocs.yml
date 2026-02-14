@@ -1,5 +1,6 @@
 site_name: My Docs
 docs_dir: docs
+base_url: /maps/
 nav:
   - Home: index.md
   - Vitamind: vitamind/index.md
