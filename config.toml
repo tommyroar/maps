@@ -1,0 +1,10 @@
+# This file defines the sandbox configuration for the Gemini CLI.
+# It is intended to provide a secure and isolated environment for script execution.
+
+[sandbox]
+enabled = true
+image = "python:3.9-slim-buster" # A basic Python image suitable for many projects.
+mounts = [
+    ".:/app" # Mount the current project directory into the sandbox at /app
+]
+working_dir = "/app" # Set the working directory inside the sandbox
