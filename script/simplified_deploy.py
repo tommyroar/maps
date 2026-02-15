@@ -80,7 +80,7 @@ def run_gh_command(command_parts, spinner_text="Running gh CLI command...", chec
             try:
                 return json.loads(result.stdout)
             except json.JSONDecodeError:
-                console.print(f"[red]Error parsing JSON from gh command. Raw stdout:[/red]\n{result.stdout}", file=sys.stderr)
+                console.print(f"[red]Error parsing JSON from gh command. Raw stdout:[/red]\n{result.stdout}")
                 return None
         return result.stdout
     except subprocess.CalledProcessError as e:
@@ -182,15 +182,21 @@ def main():
         if git_status_result.stdout.strip():
             console.print("[yellow]Uncommitted or unstaged changes detected:[/yellow]")
             console.print(git_status_result.stdout)
-            if Confirm.ask("[cyan]Do you want to add and commit these changes?[/cyan]"):
-                run_command("git add .", spinner_text="Staging changes")
-                commit_message = console.input("[cyan]Enter commit message: [/cyan]")
-                if not commit_message:
-                    raise ValueError("Commit message cannot be empty. Aborting deployment.")
-                run_command(f"git commit -m '{commit_message}'", spinner_text="Committing changes")
-                report.add_step("Commit Changes", True, "Changes committed.")
-            else:
-                raise ValueError("Deployment aborted due to uncommitted changes.")
+            
+            # Generate commit message automatically based on context
+            commit_message = "chore: Automated deployment with latest changes"
+            if "vitamind/src/App.jsx" in git_status_result.stdout and "zoom" in git_status_result.stdout: # Simple heuristic
+                commit_message = "fix: Update Mapbox zoom level and deploy SPA"
+            elif "vitamind/src/App.test.jsx" in git_status_result.stdout:
+                commit_message = "fix: Update Vitest zoom assertion and deploy"
+            elif ".gitignore" in git_status_result.stdout:
+                commit_message = "fix: Ignore secrets and deploy"
+            
+            console.print(f"[cyan]Automatically generating commit message: '{commit_message}'[/cyan]")
+
+            run_command("git add .", spinner_text="Staging changes")
+            run_command(f"git commit -m '{commit_message}'", spinner_text="Committing changes")
+            report.add_step("Commit Changes", True, f"Changes committed with message: '{commit_message}'.")
         else:
             console.print("[green]No uncommitted or unstaged changes.[/green]")
             report.add_step("Commit Changes", True, "No changes to commit.")
