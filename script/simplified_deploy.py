@@ -208,11 +208,8 @@ def main():
 
         # 3. Git Push
         console.print("\n[bold yellow]Step 3: Pushing to Remote...[/bold yellow]")
-        if Confirm.ask("[cyan]Do you want to push your changes to GitHub?[/cyan]"):
-            run_command("git push", spinner_text="Pushing commits to GitHub")
-            report.add_step("Push to GitHub", True, "Push successful.")
-        else:
-            raise ValueError("Deployment aborted. Changes not pushed.")
+        run_command("git push", spinner_text="Pushing commits to GitHub")
+        report.add_step("Push to GitHub", True, "Push successful.")
 
         # 4. Monitor GitHub Actions Workflow
         console.print("\n[bold yellow]Step 4: Monitoring GitHub Actions Workflow...[/bold yellow]")
