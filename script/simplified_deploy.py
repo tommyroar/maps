@@ -77,10 +77,14 @@ def run_gh_command(command_parts, spinner_text="Running gh CLI command...", chec
     try:
         result = run_command(['gh'] + command_parts, spinner_text=spinner_text, check=True)
         if check_json:
-            return json.loads(result.stdout)
+            try:
+                return json.loads(result.stdout)
+            except json.JSONDecodeError:
+                console.print(f"[red]Error parsing JSON from gh command. Raw stdout:[/red]\n{result.stdout}", file=sys.stderr)
+                return None
         return result.stdout
-    except (subprocess.CalledProcessError, json.JSONDecodeError) as e:
-        console.print(f"[red]Failed to run gh command or parse JSON: {e}[/red]")
+    except subprocess.CalledProcessError as e:
+        console.print(f"[red]Failed to run gh command: {e}[/red]")
         return None
 
 def get_workflow_id(workflow_name):
