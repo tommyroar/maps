@@ -3,7 +3,7 @@ name: Deploy Vitamind SPA to GitHub Pages
 on:
   push:
     branches:
-      - vitamind
+      - main # Or your default branch, e.g., master
 
 permissions:
   contents: read
