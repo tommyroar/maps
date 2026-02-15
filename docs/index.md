@@ -2,4 +2,4 @@
 
 This is the main index page.
 
-[Go to Vitamind](/vitamind/)
+[Go to Vitamind](vitamind/index.md)
