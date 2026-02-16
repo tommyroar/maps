@@ -62,7 +62,7 @@ jobs:
     steps:
       - name: Notify Central Index
         run: |
-          curl -X POST \
+          curl -X POST --fail \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ secrets.INDEX_UPDATE_TOKEN }}" \
             https://api.github.com/repos/tommyroar/tommyroar.github.io/dispatches \
