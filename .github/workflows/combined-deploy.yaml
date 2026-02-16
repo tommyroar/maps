@@ -3,8 +3,10 @@ name: Combined App and Docs Deployment
 on:
   push:
     branches:
-      - main # Triggers on push to main
-  workflow_dispatch: # Allows manual trigger
+      - main
+    paths-ignore:
+      - 'vitamind/**'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -21,22 +23,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      # Setup Node.js for Vitamind SPA
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install Vitamind dependencies
-        run: npm install
-        working-directory: vitamind
-
-      - name: Build Vitamind SPA
-        run: npm run build -- --base=/maps/vitamind/ --outDir ../gh-pages-staging/vitamind
-        working-directory: vitamind
-        env:
-          VITE_MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
 
       # Setup Python for MkDocs
       - name: Setup Python

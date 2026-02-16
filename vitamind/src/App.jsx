@@ -613,6 +613,14 @@ function App() {
                   >
                     Documentation: <a href="https://tommyroar.github.io/maps/docs/vitamind/" target="_blank" rel="noopener noreferrer" className="calendar-link">Vitamind Docs</a>
                   </p>
+                  <p 
+                    id="new-location-link" 
+                    style={{ marginTop: '15px', padding: '10px', backgroundColor: 'rgba(166, 226, 46, 0.1)', border: '1px solid #A6E22E', borderRadius: '5px' }}
+                  >
+                    🚀 <strong>Active development has moved!</strong><br />
+                    Visit the new standalone application at:<br />
+                    <a href="https://tommyroar.github.io/vitamind/" target="_blank" rel="noopener noreferrer" className="calendar-link">tommyroar.github.io/vitamind/</a>
+                  </p>
                 </div>
               </div>
             ) : (
