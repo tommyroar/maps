@@ -9,45 +9,26 @@ Whenever a new application is added or the site structure is modified, you must 
 read_file(file_path="INDEX.md")
 ```
 
-Follow the three-step process outlined in that document:
+Follow the process outlined in that document:
 1.  **Create an App Stub**: Create or update the relevant JSON file in the `apps/` directory.
-2.  **Automate Updates**: Ensure the GitHub Actions workflow includes the notification dispatch to the central repository.
-3.  **Local Verification**: If necessary, run the local indexing script as described.
+2.  **Local Verification**: If necessary, run the local indexing script as described.
 
 ---
 
-# Deployment Tasks for Vitamind SPA
+# Deployment Tasks for Vitamind Redirect
 
-This document outlines the repeatable steps for deploying the Vitamind SPA to GitHub Pages using Gemini CLI.
+This document outlines the repeatable steps for deploying the Vitamind redirect to GitHub Pages using Gemini CLI.
 
 ## Process Overview
 
 To perform a deployment, follow these steps in order:
-1.  **Run Unit Tests**
-2.  **Check and Commit Git Changes**
-3.  **Push Changes to GitHub**
-4.  **Monitor and Verify GitHub Actions Workflow**
+1.  **Check and Commit Git Changes**
+2.  **Push Changes to GitHub**
+3.  **Monitor and Verify GitHub Actions Workflow**
 
 ---
 
-## Step 1: Run Unit Tests
-
-**Objective:** Ensure all unit tests for the Vitamind SPA pass before proceeding with deployment.
-
-**Gemini Task:**
-Execute `npm test` within the `vitamind` directory.
-
-```
-run_shell_command(
-    command="npm test",
-    description="Run unit tests for the Vitamind React SPA.",
-    dir_path="vitamind"
-)
-```
-
----
-
-## Step 2: Check and Commit Git Changes
+## Step 1: Check and Commit Git Changes
 
 **Objective:** Review local Git changes, stage them, and commit before pushing.
 
@@ -65,7 +46,7 @@ run_shell_command(
 
 ---
 
-## Step 3: Push Changes to GitHub
+## Step 2: Push Changes to GitHub
 
 **Objective:** Push the committed changes to the remote GitHub repository, triggering the GitHub Actions workflow.
 
@@ -81,30 +62,29 @@ run_shell_command(
 
 ---
 
-## Step 4: Monitor and Verify GitHub Actions Workflow
+## Step 3: Monitor and Verify GitHub Actions Workflow
 
-**Objective:** Monitor the GitHub Actions workflow triggered by your push and verify the successful deployment of the SPA to GitHub Pages.
+**Objective:** Monitor the GitHub Actions workflow triggered by your push and verify the successful deployment of the redirect to GitHub Pages.
 
 **Gemini Task:**
-Always monitor the deployment with `gh cli`. For example, to monitor the latest run for a workflow named "deploy-vitamind.yaml" on the "vitamind" branch, you would use:
+Always monitor the deployment with `gh cli`. For example, to monitor the latest run for a workflow named "combined-deploy.yaml" on the "main" branch, you would use:
 ```
-gh run list --workflow="deploy-vitamind.yaml" --branch="vitamind" --json databaseId,status,conclusion --limit 1
+gh run list --workflow="combined-deploy.yaml" --branch="main" --json databaseId,status,conclusion --limit 1
 # Then, to watch a specific run:
 # gh run watch <RUN_DATABASE_ID>
 ```
 
 Gemini CLI will perform the following actions automatically:
 1.  Retrieve the SHA of your latest commit.
-2.  Identify the workflow ID for the "Deploy Vitamind SPA to GitHub Pages" workflow.
+2.  Identify the workflow ID for the "Combined App and Docs Deployment" workflow.
 3.  Continuously monitor for the latest successful workflow run associated with your commit. This includes waiting for the run to appear and complete.
-4.  Once a successful run is found, it will attempt to fetch and verify the content of your deployed SPA at `https://tommyroar.github.io/maps/vitamind/`. It will check for the expected title "vitamind".
+4.  Once a successful run is found, it will attempt to fetch and verify the content of your deployed redirect at `https://tommyroar.github.io/maps/vitamind/`. It will check for the expected title "Redirecting to Vitamind...".
 
 ```
-# Internal Logic of Gemini CLI (equivalent to parts of the removed deploy.py script)
-# This would involve:
+# Internal Logic of Gemini CLI
 # latest_commit_sha = run_shell_command(command="git rev-parse HEAD", ...)
-# workflow_id = get_workflow_id("Deploy Vitamind SPA to GitHub Pages")
+# workflow_id = get_workflow_id("Combined App and Docs Deployment")
 # get_latest_successful_deployment_run(workflow_id, commit_sha=latest_commit_sha)
-# verify_deployed_content(SPA_DEPLOY_URL, EXPECTED_SPA_TITLE)
+# verify_deployed_content("https://tommyroar.github.io/maps/vitamind/", "Redirecting to Vitamind...")
 ```
 ---

@@ -28,21 +28,7 @@ It supports:
 - **Dark Mode**: A dark mode toggle is available, with dark mode enabled by default.
 - **Project Thumbnails**: If a `[app-name].png` file is present alongside your JSON stub, it will be displayed as a thumbnail on the project card.
 
-## 3. Automate Updates via GitHub Actions
-
-To trigger an automatic index rebuild from a sub-repository after deployment, add the following step to your workflow. Note: You must provide a Personal Access Token (PAT) with `repo` scope as a secret.
-
-```yaml
-- name: Notify Central Index
-  run: |
-    curl -X POST \
-      -H "Accept: application/vnd.github.v3+json" \
-      -H "Authorization: token ${{ secrets.INDEX_UPDATE_TOKEN }}" \
-      https://api.github.com/repos/tommyroar/tommyroar.github.io/dispatches \
-      -d '{"event_type": "update_project"}'
-```
-
-## 4. Local Development and Verification
+## 3. Local Development and Verification
 
 To set up and test the project locally:
 
@@ -64,7 +50,7 @@ To set up and test the project locally:
     ```
     This will serve the React SPA, automatically recompiling on changes.
 
-## 5. Adding to Gemini CLI Context
+## 4. Adding to Gemini CLI Context
 
 To ensure Gemini CLI understands this process when working within this directory:
 
