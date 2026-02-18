@@ -1,0 +1,4 @@
+apscheduler
+pymongo
+requests
+python-dotenv

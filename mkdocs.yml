@@ -3,6 +3,11 @@ docs_dir: docs
 nav:
   - Home: index.md
   - Vitamind: vitamind/index.md
+  - RGS:
+      - Introduction: rgs/index.md
+      - Design Doc: rgs/design.md
+      - Data Model: rgs/data.md
+      - API Specification: rgs/api.md
 
 theme:
   name: material
