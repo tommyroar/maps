@@ -2,14 +2,18 @@ import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 
 // Mock mapbox-gl
-vi.mock('mapbox-gl', () => ({
-  default: {
-    accessToken: '',
-    Map: vi.fn(() => ({
-      on: vi.fn(),
-      remove: vi.fn(),
-      getCenter: vi.fn(() => ({ lng: -120, lat: 47 })),
-      getZoom: vi.fn(() => 6.5),
-    })),
-  }
-}));
+vi.mock('mapbox-gl', () => {
+  return {
+    default: {
+      accessToken: '',
+      Map: class {
+        constructor() {
+          this.on = vi.fn();
+          this.remove = vi.fn();
+          this.getCenter = vi.fn(() => ({ lng: -120, lat: 47 }));
+          this.getZoom = vi.fn(() => 6.5);
+        }
+      },
+    },
+  };
+});
