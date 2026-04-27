@@ -1,5 +1,0 @@
-tabulate
-requests
-beautifulsoup4
-rich
-mkdocs-material

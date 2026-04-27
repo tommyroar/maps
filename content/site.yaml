@@ -1,0 +1,35 @@
+title: "Scrollytelling Map"
+shortTitle: "Scrolly"
+description: "A reusable Mapbox scrollytelling site. Replace this content/ directory to make it your own."
+mapbox:
+  tokenEnvVar: VITE_MAPBOX_TOKEN
+  style: mapbox://styles/mapbox/light-v11
+initialCamera:
+  center: [-122.3321, 47.6062]
+  zoom: 11
+  pitch: 30
+  bearing: 0
+theme:
+  primary: "#0ea5e9"
+  accent: "#f43f5e"
+  font: "Inter, system-ui, sans-serif"
+routing:
+  mode: hash
+layers:
+  highlight-route:
+    source: { type: geojson, data: /content/data/sample.geojson }
+    type: line
+    paint:
+      line-color: "#f59e0b"
+      line-width: 4
+    layout:
+      visibility: none
+routes:
+  sample:
+    file: /content/routes/sample.json
+    color: "#22d3ee"
+    durationMs: 6000
+    smooth: chaikin
+    glow: true
+footer:
+  aboutMd: /content/about.md
