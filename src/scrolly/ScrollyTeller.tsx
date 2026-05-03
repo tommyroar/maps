@@ -3,6 +3,7 @@ import scrollama from 'scrollama';
 import type { Chapter } from '../engine/content-loader';
 import { useMapContext } from '../map/MapProvider';
 import { useMapCamera } from '../map/useMapCamera';
+import { MapMarkers } from '../map/MapMarkers';
 import { useChapterRouter } from './useChapterRouter';
 import { ChapterCard } from './ChapterCard';
 import { ReturnToStart } from '../components/ReturnToStart';
@@ -62,12 +63,15 @@ export function ScrollyTeller({ chapters }: ScrollyTellerProps) {
   }, [ready, chapters, layers, run, setActive, tracers]);
 
   return (
-    <div className="scroller" ref={scrollerRef}>
-      {chapters.map((c, i) => (
-        <ChapterCard key={c.slug} chapter={c} active={activeSlug === c.slug} isFirst={i === 0} />
-      ))}
-      <div style={{ height: '40vh' }} aria-hidden />
-      <ReturnToStart firstSlug={chapters[0]?.slug ?? null} />
-    </div>
+    <>
+      <MapMarkers chapters={chapters} activeSlug={activeSlug} />
+      <div className="scroller" ref={scrollerRef}>
+        {chapters.map((c) => (
+          <ChapterCard key={c.slug} chapter={c} active={activeSlug === c.slug} />
+        ))}
+        <div style={{ height: '40vh' }} aria-hidden />
+        <ReturnToStart firstSlug={chapters[0]?.slug ?? null} />
+      </div>
+    </>
   );
 }

@@ -1,35 +1,56 @@
-title: "Scrollytelling Map"
-shortTitle: "Scrolly"
-description: "A reusable Mapbox scrollytelling site. Replace this content/ directory to make it your own."
+title: "Sporty 40"
+shortTitle: "Sporty 40"
+description: "A trip story: Bellingham → Juneau by Inside Passage ferry, Alaska Highway home."
 mapbox:
   tokenEnvVar: VITE_MAPBOX_TOKEN
-  style: mapbox://styles/mapbox/light-v11
+  style: mapbox://styles/mapbox/outdoors-v12
 initialCamera:
-  center: [-122.3321, 47.6062]
-  zoom: 11
-  pitch: 30
+  center: [-128.0, 53.0]
+  zoom: 5
+  pitch: 0
   bearing: 0
 theme:
-  primary: "#0ea5e9"
-  accent: "#f43f5e"
-  font: "Inter, system-ui, sans-serif"
+  primary: "#0369a1"
+  accent: "#dc2626"
+  font: "ui-sans-serif, system-ui, -apple-system, Inter, sans-serif"
+  foreground: "#0f172a"
 routing:
   mode: hash
-layers:
-  highlight-route:
-    source: { type: geojson, data: /content/data/sample.geojson }
-    type: line
-    paint:
-      line-color: "#f59e0b"
-      line-width: 4
-    layout:
-      visibility: none
 routes:
-  sample:
-    file: /content/routes/sample.json
-    color: "#22d3ee"
+  ferry:
+    file: /content/routes/ferry.json
+    color: "#00e5ff"
+    coreColor: "#e0ffff"
+    headColor: "#00e5ff"
+    headStrokeColor: "#00e5ff"
     durationMs: 6000
-    smooth: chaikin
+    pauseMs: 800
     glow: true
-footer:
-  aboutMd: /content/about.md
+    smooth: none
+    easing: easeInOut
+  seaplane:
+    file: /content/routes/seaplane.json
+    color: "#f59e0b"
+    coreColor: "#fef3c7"
+    headColor: "#f59e0b"
+    headStrokeColor: "#f59e0b"
+    durationMs: 3500
+    pauseMs: 600
+    glow: true
+    smooth: none
+    easing: easeInOut
+  alaska-highway:
+    segments:
+      - file: /content/routes/haines-ferry.json
+        color: "#00e5ff"
+        coreColor: "#e0ffff"
+      - file: /content/routes/alaska-road.json
+        color: "#f97316"
+        coreColor: "#fff7ed"
+    headColor: "#f97316"
+    headStrokeColor: "#f97316"
+    durationMs: 14000
+    pauseMs: 1000
+    glow: true
+    smooth: none
+    easing: easeInOut

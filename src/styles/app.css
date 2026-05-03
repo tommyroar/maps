@@ -50,10 +50,16 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 6rem 0;
+  padding: 4rem 0;
 }
 
-.chapter-hero { min-height: 100vh; padding-top: 8rem; }
+.chapter-hero {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  justify-content: center;
+  padding-top: 6rem;
+}
 
 .chapter-card {
   pointer-events: auto;
@@ -65,21 +71,41 @@ body {
   backdrop-filter: blur(8px);
 }
 
+.chapter-card-hero {
+  max-width: 28rem;
+  text-align: left;
+  padding: 2rem 2rem 1.75rem;
+}
+
 .chapter-icon {
   display: inline-flex;
   width: 40px; height: 40px;
   border-radius: 50%;
-  background: rgba(14, 165, 233, 0.12);
-  color: var(--color-primary);
   align-items: center;
   justify-content: center;
   margin-bottom: 0.75rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.chapter-eyebrow {
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  font-weight: 700;
 }
 
 .chapter-title {
-  font-size: 1.6rem;
-  margin: 0 0 0.25rem;
+  font-size: 1.4rem;
+  margin: 0 0 0.75rem;
   letter-spacing: -0.01em;
+  font-weight: 700;
+}
+.chapter-title-hero {
+  font-size: 2rem;
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 .chapter-subtitle {
@@ -88,8 +114,49 @@ body {
   font-size: 0.95rem;
 }
 
-.chapter-body p { line-height: 1.55; margin: 0 0 0.85rem; }
+.chapter-body p { line-height: 1.55; margin: 0 0 0.85rem; font-size: 0.95rem; }
+.chapter-body strong { color: var(--color-foreground); }
+.chapter-body a { color: var(--color-primary); text-decoration: underline; }
+.chapter-body a:hover { filter: brightness(0.85); }
 .chapter-body img { max-width: 100%; border-radius: 8px; }
+
+.chapter-body-hero p { font-size: 1rem; }
+
+.chapter-photo {
+  margin: 1rem 0 0;
+}
+.chapter-photo img {
+  width: 100%;
+  border-radius: 0.75rem;
+  display: block;
+}
+.chapter-photo figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.chapter-scroll-hint {
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.chapter-marker {
+  cursor: default;
+}
+.chapter-marker-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.25);
+}
 
 .chapter-cta {
   display: inline-block;

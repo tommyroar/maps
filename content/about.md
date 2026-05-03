@@ -1,3 +1,4 @@
-# About
+# Sporty 40
 
-Replace `content/about.md` with your project's about copy.
+A trip narrative ported from [tommyroar/sporty40](https://github.com/tommyroar/sporty40)
+into the reusable Mapbox scrollytelling generator.
