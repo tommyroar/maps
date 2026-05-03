@@ -24,10 +24,18 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Resolve base path
+        id: base
+        run: |
+          if [ -n "${{ vars.VITE_BASE_PATH }}" ]; then
+            echo "path=${{ vars.VITE_BASE_PATH }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=/${{ github.event.repository.name }}/" >> "$GITHUB_OUTPUT"
+          fi
       - run: npm run build
         env:
           VITE_MAPBOX_TOKEN: ${{ secrets.VITE_MAPBOX_TOKEN }}
-          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || '/' }}
+          VITE_BASE_PATH: ${{ steps.base.outputs.path }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
