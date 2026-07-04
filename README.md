@@ -3,8 +3,8 @@
 A reusable Vite + React + TypeScript engine for Mapbox-driven scrollytelling sites. Drop a `content/` directory of YAML + markdown into a fork of this repo and you get a deployable static site with cinematic camera flights, layer toggles, route tracers, and photo sliders.
 
 The engine extracts the shared shell from projects like
-[JudkinsParkForPeople](https://github.com/tommyroar/JudkinsParkForPeople) and
-[sporty40](https://github.com/tommyroar/sporty40).
+[JudkinsParkForPeople](https://github.com/robogeosociety/JudkinsParkForPeople) and
+[sporty40](https://github.com/robogeosociety/sporty40).
 
 ## Quick start
 
